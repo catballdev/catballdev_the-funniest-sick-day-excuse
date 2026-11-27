@@ -7,9 +7,13 @@ output directory (honouring MAKEFUN_OUTPUT_DIR or defaulting to /output).
 """
 
 import os
+from pathlib import Path
 
-# Read the sick-day excuse from line.txt (UTF-8, one straight-line excuse)
-with open("line.txt", "r", encoding="utf-8") as f:
+# Read the sick-day excuse from line.txt (UTF-8, one straight-line excuse).
+# Locate line.txt relative to main.py's own file location so the program works
+# regardless of the current working directory it is launched from.
+here = Path(__file__).resolve().parent
+with open(here / "line.txt", "r", encoding="utf-8") as f:
     content = f.read()
 
 # Determine output directory from environment variable, default to /output
